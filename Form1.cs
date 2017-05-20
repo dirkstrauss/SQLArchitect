@@ -22,6 +22,9 @@ namespace SQLArchitect
 
         }
 
-
+        private async void btnReadFiles_Click(object sender, EventArgs e)
+        {
+            await engine.ProcessFiles(@"C:\temp\CodeSmith");
+        }
     }
 }

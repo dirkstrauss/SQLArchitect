@@ -30,6 +30,7 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnReadFiles = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -48,11 +49,22 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "File name:";
             // 
+            // btnReadFiles
+            // 
+            this.btnReadFiles.Location = new System.Drawing.Point(73, 61);
+            this.btnReadFiles.Name = "btnReadFiles";
+            this.btnReadFiles.Size = new System.Drawing.Size(75, 23);
+            this.btnReadFiles.TabIndex = 2;
+            this.btnReadFiles.Text = "button1";
+            this.btnReadFiles.UseVisualStyleBackColor = true;
+            this.btnReadFiles.Click += new System.EventHandler(this.btnReadFiles_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(475, 312);
+            this.Controls.Add(this.btnReadFiles);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
@@ -67,6 +79,7 @@
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnReadFiles;
     }
 }
 
