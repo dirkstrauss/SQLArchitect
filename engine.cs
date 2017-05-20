@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SQLArchitect.Business;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,10 @@ namespace SQLArchitect
 {
     public static class engine
     {
+        public static string DatabaseName { get; set; }
+        public static string DatabaseConnectionString { get; set; }
+
+        private static DataSet dsTables;
         public static async Task ProcessFiles(string path)
         {
             foreach (string file in Directory.GetFiles(path, "*.sql"))
@@ -18,7 +24,7 @@ namespace SQLArchitect
                     using (StreamReader reader = new StreamReader(fs, Encoding.UTF8))
                     {
                         string text = await reader.ReadToEndAsync();
-                        
+                        MatchObjects(text);
                     }
                 }
             }
@@ -26,9 +32,12 @@ namespace SQLArchitect
 
         private static void MatchObjects(string fileText)
         {
+
             if (fileText.ToUpper().Contains("ALTER TABLE"))
             {
-                // Read the whole SQL statement
+                if (dsTables == null)
+                    // Read the whole SQL statement
+                    dsTables = DataController.GetDataTables(DatabaseName, DatabaseConnectionString);
             }
             else if (fileText.ToUpper().Contains("CREATE PROCEDURE"))
             {

@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="SQLArchitect.Business\SQLArchitect.Business.csproj">
+      <Project>{5FDE3043-ED4F-48BC-AE5C-D3183EFD9B99}</Project>
+      <Name>SQLArchitect.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
