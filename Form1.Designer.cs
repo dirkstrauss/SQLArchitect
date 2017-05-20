@@ -36,7 +36,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(73, 6);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(227, 20);
+            this.textBox1.Size = new System.Drawing.Size(265, 20);
             this.textBox1.TabIndex = 0;
             // 
             // label1
@@ -52,7 +52,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 302);
+            this.ClientSize = new System.Drawing.Size(502, 318);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
