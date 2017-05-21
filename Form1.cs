@@ -104,8 +104,8 @@ namespace SQLArchitect
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HelpAbout about = new HelpAbout();
-            about.ShowDialog();
+            var about = new HelpAbout();
+            about.Show();
         }
 
         private void txtServerName_TextChanged(object sender, EventArgs e)
@@ -166,6 +166,24 @@ namespace SQLArchitect
                 selectedPath = fbd.SelectedPath;
             }
             return selectedPath;
+        }
+
+        private void ckDefaultPaths_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (ckDefaultPaths.CheckState == CheckState.Checked)
+            //{
+            //    Properties.Settings.Default.SourceFolder = txtSourcePath.Text;
+            //    Properties.Settings.Default.OutputFolder = txtOutputPath.Text;
+            //    Properties.Settings.Default.DelaultPaths = CheckState.Checked;
+            //    Properties.Settings.Default.Save();
+            //}
+            //else if(ckDefaultPaths.CheckState == CheckState.Unchecked)
+            //{
+            //    Properties.Settings.Default.SourceFolder = "";
+            //    Properties.Settings.Default.OutputFolder = "";
+            //    Properties.Settings.Default.DelaultPaths = CheckState.Unchecked;
+            //    Properties.Settings.Default.Save();
+            //}
         }
     }
 }

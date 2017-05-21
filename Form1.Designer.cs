@@ -41,24 +41,25 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSelectSourceFolder = new System.Windows.Forms.Button();
-            this.txtSourcePath = new System.Windows.Forms.TextBox();
             this.btnSelectDestinationFolder = new System.Windows.Forms.Button();
-            this.txtOutputPath = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblFullOutputPath = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ckDefaultPaths = new System.Windows.Forms.CheckBox();
+            this.txtOutputPath = new System.Windows.Forms.TextBox();
+            this.txtSourcePath = new System.Windows.Forms.TextBox();
             this.txtDatabase = new System.Windows.Forms.TextBox();
             this.txtServerName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.rbIntegratedSecurity = new System.Windows.Forms.RadioButton();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.rbUsernamePassword = new System.Windows.Forms.RadioButton();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -157,6 +158,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ckDefaultPaths);
             this.groupBox2.Controls.Add(this.lblFullOutputPath);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
@@ -186,13 +188,6 @@
             this.btnSelectSourceFolder.UseVisualStyleBackColor = true;
             this.btnSelectSourceFolder.Click += new System.EventHandler(this.btnSelectSourceFolder_Click);
             // 
-            // txtSourcePath
-            // 
-            this.txtSourcePath.Location = new System.Drawing.Point(62, 31);
-            this.txtSourcePath.Name = "txtSourcePath";
-            this.txtSourcePath.Size = new System.Drawing.Size(338, 20);
-            this.txtSourcePath.TabIndex = 1;
-            // 
             // btnSelectDestinationFolder
             // 
             this.btnSelectDestinationFolder.Location = new System.Drawing.Point(406, 55);
@@ -203,13 +198,6 @@
             this.toolTip1.SetToolTip(this.btnSelectDestinationFolder, "Select the destination for the output file");
             this.btnSelectDestinationFolder.UseVisualStyleBackColor = true;
             this.btnSelectDestinationFolder.Click += new System.EventHandler(this.btnSelectDestinationFolder_Click);
-            // 
-            // txtOutputPath
-            // 
-            this.txtOutputPath.Location = new System.Drawing.Point(62, 57);
-            this.txtOutputPath.Name = "txtOutputPath";
-            this.txtOutputPath.Size = new System.Drawing.Size(338, 20);
-            this.txtOutputPath.TabIndex = 3;
             // 
             // label6
             // 
@@ -237,6 +225,79 @@
             this.lblFullOutputPath.Size = new System.Drawing.Size(35, 13);
             this.lblFullOutputPath.TabIndex = 14;
             this.lblFullOutputPath.Text = "label8";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(715, 24);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // ckDefaultPaths
+            // 
+            this.ckDefaultPaths.AutoSize = true;
+            this.ckDefaultPaths.CheckState = global::SQLArchitect.Properties.Settings.Default.DelaultPaths;
+            this.ckDefaultPaths.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", global::SQLArchitect.Properties.Settings.Default, "DelaultPaths", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ckDefaultPaths.Location = new System.Drawing.Point(105, 147);
+            this.ckDefaultPaths.Name = "ckDefaultPaths";
+            this.ckDefaultPaths.Size = new System.Drawing.Size(167, 17);
+            this.ckDefaultPaths.TabIndex = 15;
+            this.ckDefaultPaths.Text = "Save above paths as defaults";
+            this.ckDefaultPaths.UseVisualStyleBackColor = true;
+            this.ckDefaultPaths.Visible = false;
+            this.ckDefaultPaths.CheckedChanged += new System.EventHandler(this.ckDefaultPaths_CheckedChanged);
+            // 
+            // txtOutputPath
+            // 
+            this.txtOutputPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SQLArchitect.Properties.Settings.Default, "OutputFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtOutputPath.Location = new System.Drawing.Point(62, 57);
+            this.txtOutputPath.Name = "txtOutputPath";
+            this.txtOutputPath.Size = new System.Drawing.Size(338, 20);
+            this.txtOutputPath.TabIndex = 3;
+            this.txtOutputPath.Text = global::SQLArchitect.Properties.Settings.Default.OutputFolder;
+            // 
+            // txtSourcePath
+            // 
+            this.txtSourcePath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SQLArchitect.Properties.Settings.Default, "SourceFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtSourcePath.Location = new System.Drawing.Point(62, 31);
+            this.txtSourcePath.Name = "txtSourcePath";
+            this.txtSourcePath.Size = new System.Drawing.Size(338, 20);
+            this.txtSourcePath.TabIndex = 1;
+            this.txtSourcePath.Text = global::SQLArchitect.Properties.Settings.Default.SourceFolder;
             // 
             // txtDatabase
             // 
@@ -308,47 +369,6 @@
             this.rbUsernamePassword.UseVisualStyleBackColor = true;
             this.rbUsernamePassword.CheckedChanged += new System.EventHandler(this.rbUsernamePassword_CheckedChanged);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(715, 24);
-            this.menuStrip1.TabIndex = 16;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -404,6 +424,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.CheckBox ckDefaultPaths;
     }
 }
 

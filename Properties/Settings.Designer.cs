@@ -94,5 +94,41 @@ namespace SQLArchitect.Properties {
                 this["UsernameAndPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SourceFolder {
+            get {
+                return ((string)(this["SourceFolder"]));
+            }
+            set {
+                this["SourceFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OutputFolder {
+            get {
+                return ((string)(this["OutputFolder"]));
+            }
+            set {
+                this["OutputFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Unchecked")]
+        public global::System.Windows.Forms.CheckState DelaultPaths {
+            get {
+                return ((global::System.Windows.Forms.CheckState)(this["DelaultPaths"]));
+            }
+            set {
+                this["DelaultPaths"] = value;
+            }
+        }
     }
 }

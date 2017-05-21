@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SQLArchitect.ExtensionMethods;
 
 namespace SQLArchitect
 {
@@ -34,6 +35,17 @@ namespace SQLArchitect
                     }
                 }
             }
+
+            string outputFile = Path.Combine(_newFilePath, FileName);
+            if (File.Exists(outputFile))
+            {
+                if (File.Exists($"{outputFile}.sql"))
+                {
+                    File.Move(outputFile, $"{outputFile}_Copy_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Hour}_{DateTime.Now.Minute}_{DateTime.Now.Second}.sql");
+                }
+                else
+                    File.Move(outputFile, $"{outputFile}.sql");
+            }
         }
 
         private static void MatchObjects(string fileText)
@@ -50,7 +62,7 @@ namespace SQLArchitect
                 foreach(DataRow item in dsTables.Tables["DataTables"].Rows)
                 {
                     string tableName = item["name"].ToString();
-                    if (fileText.Contains(item["name"].ToString()))
+                    if (fileText.ContainsInRelationTo(ScriptType.table, item["name"].ToString()))
                     {
                         sOutputText = fileText;
                         sObject = $"ALTER TABLE {tableName}";
@@ -66,17 +78,17 @@ namespace SQLArchitect
                 foreach (DataRow item in dsProcedures.Tables["Procedures"].Rows)
                 {
                     string sprocName = item["name"].ToString();
-                    if (fileText.Contains(sprocName))
+                    if (fileText.ContainsInRelationTo(ScriptType.procedure, sprocName))
                     {
                         StringBuilder sb = new StringBuilder();
                         
-                        sb.Append(" IF EXISTS ( SELECT * ");
-                        sb.Append("             FROM sysobjects "); 
-                        sb.Append($"             WHERE id = object_id(N'[dbo].[{sprocName}]') "); 
-                        sb.Append("                    and OBJECTPROPERTY(id, N'IsProcedure') = 1 ) ");
-                        sb.Append(" BEGIN ");
-                        sb.Append($"     DROP PROCEDURE [dbo].[{sprocName}] ");
-                        sb.Append(" END ");
+                        sb.AppendLine(" IF EXISTS ( SELECT * ");
+                        sb.AppendLine("             FROM sysobjects "); 
+                        sb.AppendLine($"             WHERE id = object_id(N'[dbo].[{sprocName}]') "); 
+                        sb.AppendLine("                    and OBJECTPROPERTY(id, N'IsProcedure') = 1 ) ");
+                        sb.AppendLine(" BEGIN ");
+                        sb.AppendLine($"     DROP PROCEDURE [dbo].[{sprocName}] ");
+                        sb.AppendLine(" END ");
 
                         sOutputText = sb.ToString();
                         sObject = $"CREATE PROCEDURE {sprocName}";
@@ -92,17 +104,17 @@ namespace SQLArchitect
                 foreach (DataRow item in dsScalarFunctions.Tables["ScalarFunctions"].Rows)
                 {
                     string funcName = item["name"].ToString();
-                    if (fileText.Contains(item["name"].ToString()))
+                    if (fileText.ContainsInRelationTo(ScriptType.function, funcName))
                     {
                         StringBuilder sb = new StringBuilder();
 
-                        sb.Append(" IF EXISTS ( SELECT * "); 
-                        sb.Append("             FROM sysobjects "); 
-                        sb.Append($"             WHERE id = object_id(N'[dbo].[{funcName}]') "); 
-                        sb.Append("                    and OBJECTPROPERTY(id, N'IsScalarFunction') = 1 ) ");
-                        sb.Append(" BEGIN ");
-                        sb.Append($"     DROP FUNCTION [dbo].[{funcName}] ");
-                        sb.Append(" END ");
+                        sb.AppendLine(" IF EXISTS ( SELECT * "); 
+                        sb.AppendLine("             FROM sysobjects "); 
+                        sb.AppendLine($"             WHERE id = object_id(N'[dbo].[{funcName}]') "); 
+                        sb.AppendLine("                    and OBJECTPROPERTY(id, N'IsScalarFunction') = 1 ) ");
+                        sb.AppendLine(" BEGIN ");
+                        sb.AppendLine($"     DROP FUNCTION [dbo].[{funcName}] ");
+                        sb.AppendLine(" END ");
 
                         sOutputText = sb.ToString();
                         sObject = $"CREATE FUNCTION {funcName}";
@@ -129,8 +141,47 @@ namespace SQLArchitect
             {
                 sw.WriteLine($"-- {objectName}");
                 sw.WriteLine(textToAppend);
-                sw.WriteLine("-- end" + Environment.NewLine + Environment.NewLine);
+                sw.WriteLine(Environment.NewLine + Environment.NewLine);
             }
+        }
+    }
+
+    public static class ExtensionMethods
+    {
+        public enum ScriptType
+        {
+            procedure,
+            function,
+            table
+        }
+        public static bool ContainsInRelationTo(this string value, ScriptType type, string name)
+        {
+            bool isMatch = false;
+            switch(type)
+            {
+                case ScriptType.procedure:
+                    if (value.Contains($"CREATE PROCEDURE [dbo].[{name}]")) { return true; }
+                    if (value.Contains($"CREATE PROCEDURE dbo.{name}")) { return true; }
+                    if (value.Contains($"CREATE PROCEDURE {name}")) { return true; }
+                    if (value.Contains($"CREATE PROCEDURE [{name}]")) { return true; }
+                    break;
+
+                case ScriptType.function:
+                    if (value.Contains($"CREATE FUNCTION [dbo].[{name}]")) { return true; }
+                    if (value.Contains($"CREATE FUNCTION dbo.{name}")) { return true; }
+                    if (value.Contains($"CREATE FUNCTION {name}")) { return true; }
+                    if (value.Contains($"CREATE FUNCTION [{name}]")) { return true; }
+                    break;
+
+                case ScriptType.table:
+                    if (value.Contains($"ALTER TABLE [dbo].[{name}]")) { return true; }
+                    if (value.Contains($"ALTER TABLE dbo.{name}")) { return true; }
+                    if (value.Contains($"ALTER TABLE {name}")) { return true; }
+                    if (value.Contains($"ALTER TABLE [{name}]")) { return true; }
+                    break;
+            }
+
+            return isMatch;
         }
     }
 }
