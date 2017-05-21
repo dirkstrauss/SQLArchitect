@@ -17,7 +17,7 @@ namespace SQLArchitect.Business
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = $"SELECT * FROM sys.objects WHERE type_desc = 'SQL_SCALAR_FUNCTION'";
 
-            return DatabaseHelper.GetDataSet(cmd, "Procedures", connectionString);
+            return DatabaseHelper.GetDataSet(cmd, "ScalarFunctions", connectionString);
         }
     }
 }

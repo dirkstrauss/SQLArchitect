@@ -26,6 +26,7 @@ namespace SQLArchitect
         {
             engine.DatabaseConnectionString = GetConnectionString();
             engine.DatabaseName = txtDatabase.Text;
+            engine.FileName = txtFileName.Text;
             await engine.ProcessFiles(@"C:\temp\CodeSmith");
         }
 
