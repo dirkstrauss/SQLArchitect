@@ -141,7 +141,7 @@ namespace SQLArchitect
             {
                 sw.WriteLine($"-- {objectName}");
                 sw.WriteLine(textToAppend);
-                sw.WriteLine(Environment.NewLine + Environment.NewLine);
+                sw.WriteLine(Environment.NewLine + Environment.NewLine); 
             }
         }
     }
