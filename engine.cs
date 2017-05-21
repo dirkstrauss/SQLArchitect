@@ -71,8 +71,8 @@ namespace SQLArchitect
                         StringBuilder sb = new StringBuilder();
                         
                         sb.Append(" IF EXISTS ( SELECT * ");
-                        sb.Append("             FROM   sysobjects "); 
-                        sb.Append($"             WHERE  id = object_id(N'[dbo].[{sprocName}]') "); 
+                        sb.Append("             FROM sysobjects "); 
+                        sb.Append($"             WHERE id = object_id(N'[dbo].[{sprocName}]') "); 
                         sb.Append("                    and OBJECTPROPERTY(id, N'IsProcedure') = 1 ) ");
                         sb.Append(" BEGIN ");
                         sb.Append($"     DROP PROCEDURE [dbo].[{sprocName}] ");
@@ -97,8 +97,8 @@ namespace SQLArchitect
                         StringBuilder sb = new StringBuilder();
 
                         sb.Append(" IF EXISTS ( SELECT * "); 
-                        sb.Append("             FROM   sysobjects "); 
-                        sb.Append($"             WHERE  id = object_id(N'[dbo].[{funcName}]') "); 
+                        sb.Append("             FROM sysobjects "); 
+                        sb.Append($"             WHERE id = object_id(N'[dbo].[{funcName}]') "); 
                         sb.Append("                    and OBJECTPROPERTY(id, N'IsScalarFunction') = 1 ) ");
                         sb.Append(" BEGIN ");
                         sb.Append($"     DROP FUNCTION [dbo].[{funcName}] ");
