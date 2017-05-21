@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetDataTables.cs" />
+    <Compile Include="GetScalarFunctions.cs" />
+    <Compile Include="GetStoredProcedures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

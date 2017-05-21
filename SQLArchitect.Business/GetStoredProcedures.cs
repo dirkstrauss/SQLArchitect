@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 namespace SQLArchitect.Business
 {
     public static partial class DataController
-    {
-        public static DataSet GetDataTables(string connectionString)
+    {        
+        public static DataSet GetStoredProcedures(string connectionString)
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT * FROM sys.objects WHERE type_desc = 'USER_TABLE'"; // $"SELECT TABLE_NAME FROM [{databaseName}].INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
-            
-            return DatabaseHelper.GetDataSet(cmd, "DataTables", connectionString);
+            cmd.CommandText = $"SELECT * FROM sys.objects WHERE type_desc = 'SQL_STORED_PROCEDURE'";
+
+            return DatabaseHelper.GetDataSet(cmd, "Procedures", connectionString);
         }        
     }
 }

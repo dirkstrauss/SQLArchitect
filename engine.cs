@@ -15,6 +15,8 @@ namespace SQLArchitect
         public static string DatabaseConnectionString { get; set; }
 
         private static DataSet dsTables;
+        private static DataSet dsProcedures;
+        private static DataSet dsScalarFunctions;
         public static async Task ProcessFiles(string path)
         {
             foreach (string file in Directory.GetFiles(path, "*.sql"))
@@ -37,15 +39,19 @@ namespace SQLArchitect
             {
                 if (dsTables == null)
                     // Read the whole SQL statement
-                    dsTables = DataController.GetDataTables(DatabaseName, DatabaseConnectionString);
+                    dsTables = DataController.GetDataTables(DatabaseConnectionString);
             }
             else if (fileText.ToUpper().Contains("CREATE PROCEDURE"))
             {
-                // Get only the Stored Procedure name
+                if (dsProcedures == null)
+                    // Get only the Stored Procedure name
+                    dsProcedures = DataController.GetStoredProcedures(DatabaseConnectionString);
             }
             else if (fileText.ToUpper().Contains("CREATE FUNCTION"))
             {
-                // Get only the Function name
+                if (dsScalarFunctions == null)
+                    // Get only the Function name
+                    dsScalarFunctions = DataController.GetScalarFunctions(DatabaseConnectionString);
             }
 
         }
